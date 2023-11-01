@@ -1,5 +1,7 @@
 import pandas as pd
 
+#hi
+
 # Load the dataset
 anime_data = pd.read_csv('/Users/professornirvar/Downloads/anime.csv')
 

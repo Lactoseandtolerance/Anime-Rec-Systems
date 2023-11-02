@@ -16,12 +16,12 @@ def anime_recommender(csv_file):
         recommended_anime = filtered_df.sort_values(by='Rating', ascending=False)
     else:
         # Filter the DataFrame based on the anime title
-        recommended_anime = df[df['Title'].str.contains(user_input, case=False, regex=True)]
+        recommended_anime = df[df['name'].str.contains(user_input, case=False, regex=True)]
 
     # Display the recommended anime
     if not recommended_anime.empty:
         print("Recommended Anime:")
-        print(recommended_anime[['Title', 'Genres', 'Rating']])
+        print(recommended_anime[['name', 'Genres', 'Rating']])
     else:
         print("No matching anime found.")
 

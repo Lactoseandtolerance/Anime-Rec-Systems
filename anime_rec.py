@@ -1,31 +1,28 @@
 import pandas as pd
 
-#hi
+def anime_recommender(csv_file):
+    df = pd.read_csv(csv_file)
 
-# Load the dataset
-anime_data = pd.read_csv('/Users/professornirvar/Downloads/anime.csv')
+    user_input = input("Enter the name of an anime or a list of genres (comma-separated): ").strip()
 
-# Preprocess the data
-'''ask for '''
-# Handle missing values, clean the dataset, etc.
+    # Check if the user input is a list of genres
+    if "," in user_input:
+        user_genres = [genre.strip() for genre in user_input.split(",")]
+        
+        # Filter the DataFrame based on the provided genres
+        filtered_df = df[df['Genres'].str.contains('|'.join(user_genres), case=False, regex=True)]
+        
+        # Sort the filtered DataFrame by rating in descending order
+        recommended_anime = filtered_df.sort_values(by='Rating', ascending=False)
+    else:
+        # Filter the DataFrame based on the anime title
+        recommended_anime = df[df['Title'].str.contains(user_input, case=False, regex=True)]
 
-# Create the user-item matrix
-user_item_matrix = anime_data.pivot_table(index='user_id', columns='anime_id', values='rating')
+    # Display the recommended anime
+    if not recommended_anime.empty:
+        print("Recommended Anime:")
+        print(recommended_anime[['Title', 'Genres', 'Rating']])
+    else:
+        print("No matching anime found.")
 
-# Calculate the cosine similarity matrix
-item_similarity = cosine_similarity(user_item_matrix.fillna(0))
-
-# Function to get top recommendations for a user
-def get_recommendations(user_id, top_n=5):
-    user_ratings = user_item_matrix.loc[user_id].fillna(0)
-    sim_scores = pd.Series(item_similarity[user_ratings.index[-1]], index=user_item_matrix.columns)
-    top_items = sim_scores.sort_values(ascending=False)[:top_n]
-    return top_items
-
-# Generate recommendations for a specific user
-user_id = 123  # Specify the user ID
-recommendations = get_recommendations(user_id, top_n=10)
-
-# Print the recommended anime titles
-recommended_anime = anime_data.loc[anime_data['anime_id'].isin(recommendations.index)]
-print(recommended_anime[['anime_id', 'title']])
+anime_recommender("anime_data.csv")

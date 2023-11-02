@@ -10,19 +10,18 @@ def anime_recommender(csv_file):
         user_genres = [genre.strip() for genre in user_input.split(",")]
         
         # Filter the DataFrame based on the provided genres
-        filtered_df = df[df['Genres'].str.contains('|'.join(user_genres), case=False, regex=True)]
+        filtered_df = df[df['genre'].str.contains(','.join(user_genres), case=False, regex=True)]
         
         # Sort the filtered DataFrame by rating in descending order
-        recommended_anime = filtered_df.sort_values(by='Rating', ascending=False)
+        recommended_anime = filtered_df.sort_values(by='rating', ascending=False)
     else:
         # Filter the DataFrame based on the anime title
         recommended_anime = df[df['name'].str.contains(user_input, case=False, regex=True)]
 
-    # Display the recommended anime
     if not recommended_anime.empty:
         print("Recommended Anime:")
-        print(recommended_anime[['name', 'Genres', 'Rating']])
+        print(recommended_anime[['name', 'genre', 'rating']])
     else:
         print("No matching anime found.")
 
-anime_recommender("anime_data.csv")
+anime_recommender("/Users/professornirvar/Downloads/anime.csv")

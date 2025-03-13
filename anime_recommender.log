@@ -1,0 +1,8 @@
+2025-03-12 23:08:19,230 - INFO - Loading data from anime.csv
+2025-03-12 23:08:19,256 - INFO - Data loaded successfully. 12294 anime entries found.
+2025-03-12 23:08:19,502 - INFO - Training content-based model
+2025-03-12 23:08:19,502 - INFO - Extracting features for content-based filtering
+2025-03-12 23:08:22,688 - INFO - Content-based model trained successfully
+2025-03-12 23:46:38,709 - INFO - Loading data from anime.csv
+2025-03-12 23:47:57,905 - INFO - Loading data from anime.csv
+2025-03-12 23:49:48,294 - INFO - Loading data from anime.csv
